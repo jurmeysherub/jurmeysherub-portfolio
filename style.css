@@ -1,0 +1,694 @@
+/* ============================================================
+   THEME VARIABLES
+   ============================================================ */
+:root {
+  --bg: #0A0A0B;
+  --surface: #131315;
+  --ink: #F2F2F0;
+  --muted: #9A9AA2;
+  --line: #2A2A2F;
+  --line-strong: #6A6A72;
+  --glow: rgba(255, 255, 255, .09);
+  --grid: rgba(255, 255, 255, .045);
+  --ridge1: #1F1F23;
+  --ridge2: #161618;
+  --ridge3: #0F0F11;
+  --edge: rgba(255, 255, 255, .16);
+  --btn: #F2F2F0;
+  --btn-ink: #0A0A0B;
+  --orb: radial-gradient(circle at 32% 28%, #fff 0, #C9C9CF 22%, #6E6E76 58%, #1E1E22 100%);
+  --orb-shadow: 0 0 70px rgba(255, 255, 255, .22);
+  --contact-bg: #131315;
+  --g1: #646973;
+  --g2: #BBCCD7;
+  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #F4F4F2;
+  --surface: #FFFFFF;
+  --ink: #0A0A0B;
+  --muted: #5E5E66;
+  --line: #DCDCD7;
+  --line-strong: #8A8A92;
+  --glow: rgba(0, 0, 0, .06);
+  --grid: rgba(0, 0, 0, .05);
+  --ridge1: #DEDEDA;
+  --ridge2: #C6C6C1;
+  --ridge3: #A9A9A4;
+  --edge: rgba(0, 0, 0, .14);
+  --btn: #0A0A0B;
+  --btn-ink: #F4F4F2;
+  --orb: radial-gradient(circle at 32% 28%, #fff 0, #D5D5DA 24%, #8C8C94 62%, #2A2A2E 100%);
+  --orb-shadow: 0 10px 50px rgba(0, 0, 0, .25);
+  --contact-bg: #0A0A0B;
+  --g1: #A3A3AB;
+  --g2: #0A0A0B;
+  color-scheme: light;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+:root {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 17px/1.6 var(--body);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color .3s, color .3s;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+nav .mark {
+  font: 800 1.1rem var(--display);
+  text-decoration: none;
+}
+
+nav .right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 22px;
+  padding: 0;
+}
+
+nav ul a {
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+nav ul a:hover {
+  color: var(--ink);
+}
+
+.toggle {
+  font: 600 .9rem var(--body);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.toggle:hover {
+  border-color: var(--line-strong);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 55% at 50% 0%, var(--glow), transparent 70%),
+    var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 20%, #000, transparent);
+  mask-image: radial-gradient(70% 70% at 50% 20%, #000, transparent);
+}
+
+.hero .wrap {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  column-gap: 24px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+nav {
+  grid-column: 1 / -1;
+}
+
+.intro {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
+  padding: clamp(24px, 6vw, 70px) 0;
+}
+
+.me {
+  display: grid;
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  justify-self: end;
+  width: min(100%, 340px);
+}
+
+.me video {
+  grid-area: 1 / 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity .35s ease;
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent),
+    linear-gradient(180deg, transparent, #000 5%, #000 94%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent),
+    linear-gradient(180deg, transparent, #000 5%, #000 94%, transparent);
+  mask-composite: intersect;
+}
+
+h1 {
+  font: 800 clamp(2.6rem, 9vw, 6.4rem) / .95 var(--display);
+  letter-spacing: -.03em;
+  max-width: 11ch;
+}
+
+.hero p.lead {
+  margin-top: 24px;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  max-width: 34ch;
+  color: var(--muted);
+}
+
+.cta {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-block;
+  padding: 13px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--line-strong);
+  transition: transform .15s;
+}
+
+.btn.primary {
+  background: var(--btn);
+  border-color: var(--btn);
+  color: var(--btn-ink);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+button.btn {
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: inherit;
+}
+
+/* ============================================================
+   SECTION BASE + HEADINGS
+   ============================================================ */
+section {
+  padding: clamp(56px, 9vw, 104px) 0;
+}
+
+.alt {
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+h2 {
+  font: 800 clamp(1.8rem, 4.5vw, 2.8rem) / 1.05 var(--display);
+  letter-spacing: -.02em;
+  margin-bottom: 28px;
+}
+
+h1,
+section:not(.contact) h2 {
+  background: linear-gradient(180deg, var(--g1) 0%, var(--g2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 5vw, 64px);
+}
+
+.about p + p {
+  margin-top: 16px;
+}
+
+.about p {
+  max-width: 60ch;
+  color: var(--muted);
+}
+
+.about p.reveal {
+  color: var(--ink);
+}
+
+.about p .w {
+  display: inline-block;
+}
+
+.facts {
+  list-style: none;
+  padding: 0 0 0 20px;
+  border-left: 2px solid var(--line-strong);
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.facts b {
+  display: block;
+  font-family: var(--display);
+}
+
+.facts span {
+  color: var(--muted);
+}
+
+/* ============================================================
+   JOURNEY / TIMELINE
+   ============================================================ */
+.path {
+  list-style: none;
+  padding: 0;
+  position: relative;
+  margin-left: 8px;
+}
+
+.path::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--line);
+}
+
+.path li {
+  position: relative;
+  padding: 0 0 30px 34px;
+}
+
+.path li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 3px solid var(--ink);
+}
+
+.path h3 {
+  font: 600 1.2rem var(--display);
+}
+
+.path p {
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+/* ============================================================
+   PROJECT CARDS (stacking scroll effect)
+   ============================================================ */
+.stack-item {
+  height: 85vh;
+  position: relative;
+}
+
+.stack-item:last-child {
+  height: auto;
+}
+
+.pcard {
+  position: sticky;
+  top: calc(88px + var(--i) * 26px);
+  transform-origin: top center;
+  will-change: transform;
+  border: 2px solid var(--line-strong);
+  border-radius: clamp(26px, 4.5vw, 52px);
+  background: var(--bg);
+  padding: clamp(14px, 2.6vw, 30px);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, .25);
+}
+
+.pc-head {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 3vw, 32px);
+  flex-wrap: wrap;
+  margin-bottom: clamp(14px, 2vw, 24px);
+}
+
+.pc-head .num {
+  font: 800 clamp(2.6rem, 7vw, 5.5rem) / 1 var(--display);
+  letter-spacing: -.03em;
+}
+
+.pc-meta {
+  flex: 1;
+  min-width: 160px;
+}
+
+.cat {
+  color: var(--muted);
+  font-size: .9rem;
+  font-weight: 500;
+}
+
+.pc-meta h3 {
+  font: 800 clamp(1.2rem, 2.6vw, 2rem) / 1.1 var(--display);
+}
+
+.pc-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pc-actions .btn {
+  padding: 10px 18px;
+  font-size: .85rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+/* Static screenshot fallback layout (used by cards with no live iframe yet) */
+.pc-shots {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.pc-shots .col {
+  flex: 0 0 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shot {
+  position: relative;
+  overflow: hidden;
+  border-radius: clamp(20px, 3.5vw, 40px);
+  background-image: var(--shot, none), var(--ph, linear-gradient(135deg, #2A2A30, #121214));
+  background-size: cover;
+  background-position: center top;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
+}
+
+.shot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, .05) 30%, transparent 46%);
+  pointer-events: none;
+}
+
+.s1 {
+  height: clamp(110px, 15vh, 200px);
+}
+
+.s2 {
+  height: clamp(140px, 22vh, 290px);
+  --ph: linear-gradient(200deg, #1F1F24, #0E0E10);
+}
+
+.s3 {
+  flex: 1;
+  min-height: 100%;
+  --ph: linear-gradient(160deg, #34343B, #101013);
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(14px, 2vw, 26px);
+  color: #fff;
+  font: 800 clamp(1rem, 2vw, 1.6rem) / 1.1 var(--display);
+}
+
+.s3 span {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, .8);
+}
+
+/* ============================================================
+   PROJECT CARDS — LIVE IFRAME PREVIEW (desktop)
+   ============================================================ */
+.project-preview-frame {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  border-radius: clamp(20px, 3.5vw, 40px);
+  background: #111;
+  margin-bottom: clamp(14px, 2vw, 26px);
+}
+
+.project-preview-frame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1440px;
+  height: 2400px;
+  border: 0;
+  transform-origin: top left;
+  pointer-events: none;
+  animation: autopan 16s ease-in-out infinite;
+}
+
+@keyframes autopan {
+  0%, 8%    { transform: scale(.42) translateY(0); }
+  45%, 55%  { transform: scale(.42) translateY(-1700px); }
+  92%, 100% { transform: scale(.42) translateY(0); }
+}
+
+.pc-overlay {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  background: transparent;
+}
+
+.pc-overlay:hover {
+  background: rgba(0, 0, 0, .05);
+}
+
+/* ============================================================
+   SKILLS
+   ============================================================ */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skills span {
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  font-weight: 500;
+}
+
+/* ============================================================
+   CONTACT & FOOTER
+   ============================================================ */
+.contact {
+  background: var(--contact-bg);
+  color: #F2F2F0;
+  border-top: 1px solid var(--line);
+}
+
+.contact h2 {
+  color: #F2F2F0;
+}
+
+.contact p {
+  max-width: 46ch;
+  color: #A9A9B1;
+  margin-bottom: 26px;
+}
+
+.contact .btn {
+  background: #F2F2F0;
+  border-color: #F2F2F0;
+  color: #0A0A0B;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+footer {
+  padding: 22px 0;
+  color: var(--muted);
+  font-size: .9rem;
+  text-align: center;
+  background: var(--bg);
+}
+
+/* ============================================================
+   SCROLL-REVEAL / MAGNET EFFECTS
+   ============================================================ */
+[hidden] {
+  display: none !important;
+}
+
+.fade {
+  opacity: 0;
+  translate: 0 30px;
+  transition:
+    opacity .7s cubic-bezier(.25, .1, .25, 1),
+    translate .7s cubic-bezier(.25, .1, .25, 1);
+}
+
+.fade.in {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.magnet {
+  transition: translate .3s ease-out, transform .15s;
+}
+
+/* ============================================================
+   RESPONSIVE — TABLET / MOBILE (max-width: 720px)
+   ============================================================ */
+@media (max-width: 720px) {
+  .about,
+  .proj {
+    grid-template-columns: 1fr;
+  }
+
+  nav ul {
+    gap: 14px;
+  }
+
+  .hero .wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .me {
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: center;
+    width: min(78vw, 300px);
+  }
+
+  /* Live preview iframe: render at real mobile width (so the embedded
+     site shows its own mobile layout) and tall enough to pan the
+     whole page, at a calmer pace than the desktop version */
+  .project-preview-frame {
+    height: 280px;
+  }
+
+  .project-preview-frame iframe {
+    width: 390px;
+    height: 3200px;
+    transform: scale(1);
+    animation-name: autopan;
+    animation-duration: 32s;
+  }
+
+  @keyframes autopan {
+    0%, 8%    { transform: scale(1) translateY(0); }
+    45%, 55%  { transform: scale(1) translateY(-2300px); }
+    92%, 100% { transform: scale(1) translateY(0); }
+  }
+}
+
+/* ============================================================
+   ACCESSIBILITY — REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn,
+  body {
+    transition: none;
+  }
+
+  .project-preview-frame iframe {
+    animation: none;
+  }
+}
